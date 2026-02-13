@@ -12,44 +12,49 @@ A Flask-based REST API that provides access to NYPD shooting incident data from 
 The API will run locally at: http://127.0.0.1:5000
 
 ## API Documentation
-1. Welcome
+### 1. Welcome
+
 **Method**: GET
 **Path**: /
-### Query Parameters: None
+#### Query Parameters: None
 
 Returns a welcome message.
 Example: http://127.0.0.1:5000/
 
-2. Sum
+### 2. Sum
+
 **Method**: GET
 **Path**: /sum
-### Query Parameters
+
+#### Query Parameters
 - a (integer)
 - b (integer)
 
 Returns the sum of two integers in JSON format.
 Example: http://127.0.0.1:5000/sum?a=3&b=4
 
-3. Factorial
+### 3. Factorial
+
 **Method**: GET
 **Path**: /factorial
-### Query Parameters
+#### Query Parameters
 - n (integer, optional, default = 10)
 Returns n! in JSON format.
 
 Example: http://127.0.0.1:5000/factorial?n=6
 
-4. List NYPD Shooting Records
+### 4. List NYPD Shooting Records
+
 **Method**: GET
 **Path**: /api/list
-### Query Parameters
+#### Query Parameters
 - format — json or csv (default: json)
 - filterby — column name to filter by
 - filtervalue — value to filter
 - limit — number of rows to return (default: 20)
 - offset — starting row (default: 0)
 
-### Example Queries
+#### Example Queries
 - Return first 20 records (default):
 http://127.0.0.1:5000/api/list
 
@@ -62,10 +67,11 @@ http://127.0.0.1:5000/api/list?filterby=BORO&filtervalue=MANHATTAN&limit=5&offse
 - CSV output:
 http://127.0.0.1:5000/api/list?format=csv
 
-5. Retrieve Single Record
+### 5. Retrieve Single Record
+
 **Method**: GET
 **Path**: /api/record/<INCIDENT_KEY>
-### Query Parameters
+#### Query Parameters
 - format — json or csv (default: json)
 
 Example:
