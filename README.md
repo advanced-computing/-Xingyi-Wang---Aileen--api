@@ -15,7 +15,9 @@ The API will run locally at: http://127.0.0.1:5000
 ### 1. Welcome
 
 **Method**: GET
+
 **Path**: /
+
 #### Query Parameters: None
 
 Returns a welcome message.
@@ -24,6 +26,7 @@ Example: http://127.0.0.1:5000/
 ### 2. Sum
 
 **Method**: GET
+
 **Path**: /sum
 
 #### Query Parameters
@@ -36,6 +39,7 @@ Example: http://127.0.0.1:5000/sum?a=3&b=4
 ### 3. Factorial
 
 **Method**: GET
+
 **Path**: /factorial
 #### Query Parameters
 - n (integer, optional, default = 10)
@@ -46,6 +50,7 @@ Example: http://127.0.0.1:5000/factorial?n=6
 ### 4. List NYPD Shooting Records
 
 **Method**: GET
+
 **Path**: /api/list
 #### Query Parameters
 - format — json or csv (default: json)
@@ -70,7 +75,9 @@ http://127.0.0.1:5000/api/list?format=csv
 ### 5. Retrieve Single Record
 
 **Method**: GET
+
 **Path**: /api/record/<INCIDENT_KEY>
+
 #### Query Parameters
 - format — json or csv (default: json)
 
