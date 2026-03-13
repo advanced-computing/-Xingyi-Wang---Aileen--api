@@ -21,7 +21,6 @@ def test_incident_date_not_future(df):
     dates = pd.to_datetime(df["OCCUR_DATE"], errors="coerce")
     today = pd.Timestamp(datetime.today().date())
 
-    # 比例方式检查（更专业）
     invalid_ratio = (dates > today).mean()
     assert invalid_ratio == 0
 
