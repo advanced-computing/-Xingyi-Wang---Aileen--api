@@ -1,17 +1,21 @@
-# NYPD Shootings API 
+# NYPD Shootings API
+
 A Flask-based REST API that provides access to NYPD shooting incident data from a CSV file.
 
 ### Installation
+
 1. Clone the repository and navigate into the project folder
 2. Create a virtual environment
 3. Install dependencies in the requirements.txt
 
 ### Run the API
+
 'python app.py'
 
 The API will run locally at: http://127.0.0.1:5000
 
 ## API Documentation
+
 ### 1. Welcome
 
 **Method**: GET
@@ -30,6 +34,7 @@ Example: http://127.0.0.1:5000/
 **Path**: /sum
 
 #### Query Parameters
+
 - a (integer)
 - b (integer)
 
@@ -41,9 +46,11 @@ Example: http://127.0.0.1:5000/sum?a=3&b=4
 **Method**: GET
 
 **Path**: /factorial
+
 #### Query Parameters
+
 - n (integer, optional, default = 10)
-Returns n! in JSON format.
+  Returns n! in JSON format.
 
 Example: http://127.0.0.1:5000/factorial?n=6
 
@@ -52,7 +59,9 @@ Example: http://127.0.0.1:5000/factorial?n=6
 **Method**: GET
 
 **Path**: /api/list
+
 #### Query Parameters
+
 - format — json or csv (default: json)
 - filterby — column name to filter by
 - filtervalue — value to filter
@@ -60,17 +69,18 @@ Example: http://127.0.0.1:5000/factorial?n=6
 - offset — starting row (default: 0)
 
 #### Example Queries
+
 - Return first 20 records (default):
-http://127.0.0.1:5000/api/list
+  http://127.0.0.1:5000/api/list
 
 - Filter by borough:
-http://127.0.0.1:5000/api/list?filterby=BORO&filtervalue=MANHATTAN
+  http://127.0.0.1:5000/api/list?filterby=BORO&filtervalue=MANHATTAN
 
 - Filter + limit + offset:
-http://127.0.0.1:5000/api/list?filterby=BORO&filtervalue=MANHATTAN&limit=5&offset=2
+  http://127.0.0.1:5000/api/list?filterby=BORO&filtervalue=MANHATTAN&limit=5&offset=2
 
 - CSV output:
-http://127.0.0.1:5000/api/list?format=csv
+  http://127.0.0.1:5000/api/list?format=csv
 
 ### 5. Retrieve Single Record
 
@@ -79,6 +89,7 @@ http://127.0.0.1:5000/api/list?format=csv
 **Path**: /api/record/<INCIDENT_KEY>
 
 #### Query Parameters
+
 - format — json or csv (default: json)
 
 Example:
