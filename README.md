@@ -6,7 +6,7 @@ A Flask-based REST API that provides access to NYPD shooting incident data from 
 
 1. Clone the repository and navigate into the project folder
 2. Create a virtual environment
-3. nstall dependencies in the requirements.txt
+3. Install dependencies in the requirements.txt
 
 ### Run the API
 
@@ -98,6 +98,60 @@ http://127.0.0.1:5000/api/record/297623042
 CSV format:
 http://127.0.0.1:5000/api/record/297623042?format=csv
 
+### 6. Add a User
+
+**Method**: POST  
+
+**Path**: `/api/users`
+
+Adds a new user to the database.
+
+#### Request Body (JSON)
+
+```json
+{
+  "username": "Andy",
+  "age": 38,
+  "country": "USA"
+}
+
+Example Request:
+curl -X POST http://127.0.0.1:5000/api/users \
+-H "Content-Type: application/json" \
+-d '{"username":"Andy","age":38,"country":"USA"}'
+
+{
+  "message": "User added"
+}
+
+### 7. Get User Statistics
+
+**Method**: GET  
+
+**Path**: `/api/users/stats`
+
+Returns:
+- the total number of users
+- the average age of users
+- the three countries with the most users
+
+#### Example Request
+
+http://127.0.0.1:5000/api/users/stats
+
+#### Example Response
+
+```json
+{
+  "number_of_users": 5,
+  "average_age": 28.4,
+  "top_countries": [
+    ["USA", 2],
+    ["China", 1],
+    ["Italy", 1]
+  ]
+}
+
 ## Features Implemented
 
 - Read CSV data using pandas
@@ -106,3 +160,5 @@ http://127.0.0.1:5000/api/record/297623042?format=csv
 - JSON and CSV output formats
 - Retrieve single record by identifier
 - Additional utility endpoints (sum, factorial)
+- Add User to Database
+- Access to their statistics (number of users, the average age, and the three countries with the most users).

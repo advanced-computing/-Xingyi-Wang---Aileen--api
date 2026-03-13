@@ -4,6 +4,21 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 DB_FILE = "app.duckdb"
+import os
+
+import pandas as pd
+from flask import Flask, Response, jsonify, request
+import duckdb
+
+app = Flask(__name__)
+
+# ====== Paths ======
+#BASE_DIR = "/Users/dl/Desktop/Python/26spring-project/-Xingyi-Wang---Aileen--api"
+#DATA_PATH = os.path.join(BASE_DIR, "data", "NYPD_Shootings_20260213.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data", "NYPD_Shootings_20260213.csv")
+
+ID_COL = "INCIDENT_KEY"
 
 
 def get_connection():
@@ -111,6 +126,61 @@ def get_user_stats():
     finally:
         con.close()
 
+#Lab 7 
+DB_FILE = "shooting.db"
+
+with duckdb.connect(DB_FILE) as con:
+    con.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            username VARCHAR,
+            age INTEGER,
+            country VARCHAR
+        )
+    """)
+
+@app.route("/api/users", methods=["POST"])
+def add_user():
+
+    data = request.get_json()
+
+    username = data["username"]
+    age = data["age"]
+    country = data["country"]
+
+    with duckdb.connect(DB_FILE) as con:
+        con.execute("""
+            INSERT INTO users VALUES (?, ?, ?)
+        """, [username, age, country])
+
+    return jsonify({"message": "User added"})
+
+@app.route("/api/users/stats", methods=["GET"])
+def get_user_stats():
+    with duckdb.connect(DB_FILE) as con:
+        number_of_users = con.execute("""
+            SELECT COUNT(*) FROM users
+        """).fetchone()[0]
+
+        average_age = con.execute("""
+            SELECT AVG(age) FROM users
+        """).fetchone()[0]
+
+        top_countries = con.execute("""
+            SELECT country, COUNT(*) AS user_count
+            FROM users
+            GROUP BY country
+            ORDER BY user_count DESC
+            LIMIT 3
+        """).fetchall()
+
+    return jsonify({
+        "number_of_users": number_of_users,
+        "average_age": average_age,
+        "top_3_countries": [
+            {"country": country, "user_count": user_count}
+            for country, user_count in top_countries
+        ]
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
